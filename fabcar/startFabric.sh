@@ -7,7 +7,7 @@
 # Exit on first error
 set -e
 
-# don't rewrite paths for Windows Git Bash users
+# Condição para o parametro passado depois do ./startFabric, para saber qual a linguagem de programção vai ser implementado o SmartContrat 
 export MSYS_NO_PATHCONV=1
 starttime=$(date +%s)
 CC_SRC_LANGUAGE=${1:-"go"}
@@ -21,12 +21,12 @@ if [ "$CC_SRC_LANGUAGE" != "go" -a "$CC_SRC_LANGUAGE" != "golang" -a "$CC_SRC_LA
 
 fi
 
-# clean out any old identites in the wallets
+# Apagando as carteiras criadas anteriormente quando execultado esse script
 rm -rf javascript/wallet/*
 rm -rf java/wallet/*
 rm -rf typescript/wallet/*
 
-# launch network; create channel and join peer to channel
+# Subindo a rede; criando o canal e conectando o peer a ele
 pushd ../test-network
 ./network.sh down
 ./network.sh up createChannel -ca -s couchdb
